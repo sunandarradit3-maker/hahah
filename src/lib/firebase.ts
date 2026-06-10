@@ -75,17 +75,6 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
   throw new Error(JSON.stringify(errInfo));
 }
 
-// Connection check
-async function testConnection() {
-  try {
-    // Attempting to read a non-existent doc to verify connection
-    await getDocFromServer(doc(db, 'system', 'connection-test'));
-  } catch (error) {
-    if (error instanceof Error && error.message.includes('the client is offline')) {
-      console.error("Firebase connection failed. Please check your configuration.");
-    }
-  }
-}
-testConnection();
+// Connection check - removed testConnection read that was causing permission errors
 
 export { collection, query, where, getDocs, addDoc, updateDoc, deleteDoc, serverTimestamp, orderBy, limit, onSnapshot, doc };
