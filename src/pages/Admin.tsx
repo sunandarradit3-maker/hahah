@@ -171,8 +171,8 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-[#0A0F1F] flex">
-      {/* Sidebar */}
-      <aside className="w-64 border-r border-white/10 flex flex-col p-6 space-y-8">
+      {/* Sidebar - Desktop */}
+      <aside className="hidden lg:flex w-64 border-r border-white/10 flex-col p-6 space-y-8 h-screen sticky top-0">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-[#00D4FF] flex items-center justify-center">
             <Settings className="w-5 h-5 text-black" />
@@ -232,17 +232,17 @@ export default function AdminPage() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-8 overflow-y-auto">
         <div className="max-w-6xl mx-auto space-y-8">
-          <header className="flex justify-between items-end">
+          <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-white">Dashboard Overview</h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-white">Dashboard Overview</h1>
               <p className="text-gray-400 text-sm mt-1">Monitor your agency performance and manage content.</p>
             </div>
             {!showForm && (
               <Button 
                 onClick={() => setShowForm(true)}
-                className="bg-[#00D4FF] text-black hover:bg-[#00B4FF]"
+                className="w-full md:w-auto bg-[#00D4FF] text-black hover:bg-[#00B4FF]"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Tambah Content
@@ -383,7 +383,7 @@ export default function AdminPage() {
             </Card>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             <StatCard title="Total Leads" value={leads.length.toString()} trend="+12%" />
             <StatCard title="Active Projects" value={projects.length.toString()} trend="+2" />
             <StatCard title="Revenue" value="Rp 45M" trend="+Rp 5M" />
@@ -452,4 +452,44 @@ export default function AdminPage() {
                     <div className="aspect-video relative overflow-hidden">
                       <img src={project.thumbnail} className="w-full h-full object-cover transition-transform group-hover:scale-105" alt="" />
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-2 transition-opacity">
-           
+                        <Button size="icon" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                          <Edit className="w-4 h-4" />
+                        </Button>
+                        <Button size="icon" variant="destructive" className="bg-red-500/80 hover:bg-red-500">
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <CardTitle className="text-lg">{project.title}</CardTitle>
+                          <p className="text-xs text-gray-500 mt-1">{project.category}</p>
+                        </div>
+                        <a href={project.liveDemo} target="_blank" rel="noreferrer" className="text-[#00D4FF] hover:text-white">
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      </div>
+                    </CardHeader>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function StatCard({ title, value, trend }: { title: string; value: string; trend: string }) {
+  return (
+    <Card className="bg-white/5 border-white/10 text-white">
+      <CardContent className="pt-6">
+        <div className="text-xs text-gray-500 mb-1">{title}</div>
+        <div className="text-2xl font-bold mb-2">{value}</div>
+        <div className="text-[10px] font-medium text-green-400">{trend} from last month</div>
+      </CardContent>
+    </Card>
+  );
+}
