@@ -1,0 +1,8 @@
+{
+  "name": "DiTz Store Agency CMS",
+  "description": "Fullstack SaaS Portfolio System for DiTz Store Agency",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

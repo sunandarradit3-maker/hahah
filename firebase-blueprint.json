@@ -1,0 +1,132 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "Portfolio item for the agency",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "gallery": { "type": "array", "items": { "type": "string" } },
+        "techStack": { "type": "array", "items": { "type": "string" } },
+        "liveDemo": { "type": "string" },
+        "github": { "type": "string" },
+        "featured": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "slug", "description", "category", "thumbnail"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "Services offered by the agency",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "icon": { "type": "string" },
+        "features": { "type": "array", "items": { "type": "string" } },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "description"]
+    },
+    "PricingPlan": {
+      "title": "Pricing Plan",
+      "description": "Agency pricing packages",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "price": { "type": "string" },
+        "description": { "type": "string" },
+        "features": { "type": "array", "items": { "type": "string" } },
+        "popular": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "price"]
+    },
+    "Testimonial": {
+      "title": "Testimonial",
+      "description": "Client feedback",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "content": { "type": "string" },
+        "avatar": { "type": "string" },
+        "rating": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "content"]
+    },
+    "FAQ": {
+      "title": "FAQ",
+      "description": "Frequently asked questions",
+      "type": "object",
+      "properties": {
+        "question": { "type": "string" },
+        "answer": { "type": "string" },
+        "category": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["question", "answer"]
+    },
+    "BlogPost": {
+      "title": "Blog Post",
+      "description": "Agency blog content",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "content": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "category": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "seoTitle": { "type": "string" },
+        "seoDescription": { "type": "string" },
+        "published": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "slug", "content", "thumbnail"]
+    },
+    "Lead": {
+      "title": "Lead",
+      "description": "Contact form submissions",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["New", "Contacted", "Negotiation", "Won", "Lost"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "message", "createdAt"]
+    },
+    "Setting": {
+      "title": "Setting",
+      "description": "Global application settings",
+      "type": "object",
+      "properties": {
+        "logo": { "type": "string" },
+        "brandName": { "type": "string" },
+        "email": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "social": { "type": "object" },
+        "seo": { "type": "object" }
+      }
+    }
+  },
+  "firestore": {
+    "projects": { "schema": "Project", "description": "Agency portfolio projects" },
+    "services": { "schema": "Service", "description": "Agency services list" },
+    "pricing_plans": { "schema": "PricingPlan", "description": "Agency pricing packages" },
+    "testimonials": { "schema": "Testimonial", "description": "Client testimonials" },
+    "faqs": { "schema": "FAQ", "description": "FAQ items" },
+    "blog_posts": { "schema": "BlogPost", "description": "Agency blog entries" },
+    "leads": { "schema": "Lead", "description": "Prospective client leads" },
+    "settings": { "schema": "Setting", "description": "Global site configuration" }
+  }
+}
